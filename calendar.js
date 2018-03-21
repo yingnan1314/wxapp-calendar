@@ -35,7 +35,7 @@ Page({
   },
   //翻页加载
   pageaddload: function () {
-    this.createCalendar(this.data.today);
+    this.createCalendar();
   },
   //选择日期
   chooseCalendar: function (e) {
@@ -60,10 +60,11 @@ Page({
     console.log(e.target.dataset, 'isCheck', data[onetwo[0]].arr[onetwo[1] - 1].day, data[onetwo[0]].current)
   },
   //生成单个月份小日历
-  createCalendar: function (today) {
+  createCalendar: function () {
     var calArr = [],
       current = 0;
     if (this.data.currentMonth == '') {
+      var today = this.data.today;
       var firstDay = (new Date(today.substr(0, 8) + '01')).getDay(),
         lastDay = (new Date(today.substr(0, 4), today.substr(5, 2), 0)).getDate();
       this.setData({
@@ -142,11 +143,12 @@ Page({
       month = '0' + month;
     }
     var now = date.getFullYear() + '-' + month + '-' + date.getDate();
-    console.log(now);
-    console.log(now)
+    this.setData({
+      today: now,
+    })
     //根据屏幕大小初始化日历铺满，一个函数输出一个月份
-    this.createCalendar(now);
-    this.createCalendar(now);
-    this.createCalendar(now);
+    this.createCalendar();
+    this.createCalendar();
+    this.createCalendar();
   }
 })
