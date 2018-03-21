@@ -1,0 +1,23 @@
+<!--calendar.wxml-->
+<view class="container">
+  <view class="calendarMain" wx:if="{{calendar}}" catchtouchmove="true">
+    <view class="calendarTR">
+      <view class="calendarTR_list">
+        <view wx:for="{{calendarTR}}" class="{{index == 0 ? 'calendarTR_week' : ''}} {{index == 6 ? 'calendarTR_week' : ''}}" wx:key="index" wx:item="item">{{item}}</view>
+      </view>
+    </view>
+    <scroll-view scroll-y bindscrolltolower="pageaddload" lower-threshold="100" class="monthList">
+      <view class="monthFOR" wx:for="{{calendarLIST}}" wx:key="indexs" wx:for-item="items">
+      <view class="monthTop">
+        <view class="month">{{items.month}}</view>
+        <view class="year">{{items.year}}</view>
+      </view>
+      <view class="dayBlock {{item.weekend}} {{item.day < items.current ? 'invalid' : ''}} {{item.isCheck}}" wx:for="{{items.arr}}" wx:key="index" wx:for-item="item" data-id="{{item.code}}" data-whidhMonth="{{item.whidhMonth}}" bindtap="chooseCalendar">{{items.current > 0 && items.current == item.day ? '今天': (item.day > 0 ? item.day : '')}}</view>
+      <view class="clear"></view>
+      </view>
+    </scroll-view>
+    <view class="showBtn" bindtap="_calendarSubmit">
+      确认
+    </view>
+  </view>
+</view>
